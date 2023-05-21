@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hci/main.dart';
+import 'package:flutter_hci/word_detail.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
+  SearchScreen({super.key});
+
+  final entries = [
+    'assignment',
+    'end-term',
+    'human-computer interaction',
+    '기말'
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(children: [
       Container(
-          color: Colors.lightBlue,
+        color: Colors.lightBlue,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Container(
@@ -26,12 +33,36 @@ class SearchScreen extends StatelessWidget {
             ]),
             Container(
               padding: const EdgeInsets.all(8.0),
-              child: SearchBox(
-                onTextChanged: (text) {
-                  print('Search text changed: $text');
-                }
+              child: SearchBox(onTextChanged: (text) {}),
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 300,
+              child: ListView.separated(
+                padding: const EdgeInsets.all(8.0),
+                itemCount: entries.length,
+                itemBuilder: (context, index) => SizedBox(
+                    height: 30,
+                    child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          entries[index],
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.white70),
+                        ))),
+                separatorBuilder: (context, index) =>
+                    const Divider(height: 10, thickness: 1),
               ),
             ),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Row(children: [
+                  Container(
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.white),
+                      child: Switch(value: true, onChanged: (context) => {})),
+                  const Text('추천 검색어 보이기')
+                ])),
           ])),
     ]));
   }
@@ -66,8 +97,9 @@ class _SearchBoxState extends State<SearchBox> {
       textAlignVertical: TextAlignVertical.center,
       controller: _searchController,
       onChanged: widget.onTextChanged,
-      onTapOutside: (e) {
-        Navigator.pop(context);
+      onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const DetailedScreen()));
       },
       textInputAction: TextInputAction.search,
       decoration: InputDecoration(
@@ -81,4 +113,3 @@ class _SearchBoxState extends State<SearchBox> {
     );
   }
 }
-

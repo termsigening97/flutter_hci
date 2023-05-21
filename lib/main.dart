@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hci/search.dart';
+import 'package:flutter_hci/word_detail.dart';
 
 void main() => runApp(MaterialApp(
     title: 'Naver Dictionary HCI',
@@ -43,10 +44,8 @@ class MyApp extends StatelessWidget {
               child: TextField(
                 textAlignVertical: TextAlignVertical.center,
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SearchScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SearchScreen()));
                 },
                 textInputAction: TextInputAction.search,
                 decoration: InputDecoration(
