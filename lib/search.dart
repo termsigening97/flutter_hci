@@ -16,7 +16,7 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
         body: Column(children: [
       Container(
-        color: Colors.lightBlue,
+          color: Colors.lightBlue,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Container(
@@ -45,11 +45,15 @@ class SearchScreen extends StatelessWidget {
                     height: 30,
                     child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                          entries[index],
-                          style: const TextStyle(
-                              fontSize: 18, color: Colors.white70),
-                        ))),
+                        child: Row(children: [
+                          const Icon(Icons.history, color: Colors.white70),
+                          const SizedBox(width: 10),
+                          Text(
+                            entries[index],
+                            style: const TextStyle(
+                                fontSize: 18, color: Colors.white70),
+                          )
+                        ]))),
                 separatorBuilder: (context, index) =>
                     const Divider(height: 10, thickness: 1),
               ),
@@ -98,8 +102,8 @@ class _SearchBoxState extends State<SearchBox> {
       controller: _searchController,
       onChanged: widget.onTextChanged,
       onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const DetailedScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const DetailedScreen()));
       },
       textInputAction: TextInputAction.search,
       decoration: InputDecoration(
