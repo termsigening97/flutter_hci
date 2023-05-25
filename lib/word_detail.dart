@@ -28,7 +28,7 @@ class _DetailedScreenState extends State<DetailedScreen>
     return Scaffold(
       body: Column(children: [
         Container(
-          color: Colors.lightBlue,
+          color: Theme.of(context).primaryColor,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Container(

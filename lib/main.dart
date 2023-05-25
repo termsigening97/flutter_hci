@@ -2,10 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hci/search.dart';
 import 'package:flutter_hci/word_detail.dart';
 
+const Color themeColor = Color.fromRGBO(32, 226, 111, 1.0);
+
+MaterialColor createMaterialColor(Color color) {
+  List strengths = <double>[.05];
+  final swatch = <int, Color>{};
+  final int r = color.red, g = color.green, b = color.blue;
+
+  for (var i = 1; i < 10; i++) {
+    strengths.add(0.1 * i);
+  }
+
+  for (var strength in strengths) {
+    final double ds = 0.5 - strength;
+    swatch[(strength * 1000).round()] = Color.fromRGBO(
+      r + ((ds < 0 ? r : (255 - r)) * ds).round(),
+      g + ((ds < 0 ? g : (255 - g)) * ds).round(),
+      b + ((ds < 0 ? b : (255 - b)) * ds).round(),
+      1,
+    );
+  }
+
+  return MaterialColor(color.value, swatch);
+}
+
 void main() => runApp(MaterialApp(
     title: 'Naver Dictionary HCI',
     theme: ThemeData(
-      primarySwatch: Colors.blue,
+      primarySwatch: createMaterialColor(themeColor)
     ),
     home: const MyApp()));
 
@@ -20,11 +44,11 @@ class MyApp extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const DrawerHeader(
+            DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Theme.of(context).primaryColor,
               ),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -113,7 +137,7 @@ class MyApp extends StatelessWidget {
       ),
       body: Column(children: [
         Container(
-          color: Colors.lightBlue,
+          color: Theme.of(context).primaryColor,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Container(
                 padding: const EdgeInsets.only(bottom: 250.0),
